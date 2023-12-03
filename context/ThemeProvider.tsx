@@ -10,18 +10,19 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [mode, setMode] = useState("");
+  const [mode, setMode] = useState("light");
 
   useEffect(() => {
-    handleThemeChange();
+    handleThemeChange(mode);
   }, [mode]);
 
-  const handleThemeChange = () => {
-    if (mode === "dark") {
-      document.documentElement.classList.add("light");
-    } else {
-      document.documentElement.classList.add("dark");
-    }
+  const handleThemeChange = (mode) => {
+    console.log("mode ", mode);
+    document.documentElement.classList.add(mode);
+    // if (mode === "dark" || ) {
+    // } else {
+    //   document.documentElement.classList.add("dark");
+    // }
   };
 
   return (
