@@ -3,19 +3,13 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import Link from "next/link";
 import { SignedOut } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-
-const NavContent = () => {
-  return <div>nav content</div>;
-};
+import NavContent from "./NavContent";
 
 const MobileNav = () => {
   return (
