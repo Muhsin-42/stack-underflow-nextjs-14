@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import Theme from "./Theme";
 import MobileNav from "./MobileNav";
+import GlobalSearch from "../Search/GlobalSearch";
 
 const NavBar = () => {
   return (
@@ -16,9 +17,10 @@ const NavBar = () => {
           alt="DevFlow"
         />
         <p className="h2-bold font-spaceGrotesk text-dark-100 dark:text-light-900 max-sm:hidden">
-          Stack <span className="text-primary-500">Underflow</span>
+          Stack<span className="text-primary-500">Underflow</span>
         </p>
       </Link>
+      <GlobalSearch />
       <div className="flex-between gap-5">
         <Theme />
         <SignedIn>

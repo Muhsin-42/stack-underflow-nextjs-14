@@ -3,19 +3,13 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import Link from "next/link";
 import { SignedOut } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-
-const NavContent = () => {
-  return <div>nav content</div>;
-};
+import NavContent from "./NavContent";
 
 const MobileNav = () => {
   return (
@@ -41,24 +35,28 @@ const MobileNav = () => {
             alt="DevFlow"
           />
           <p className="h2-bold text-dark100_light900 font-spaceGrotesk">
-            Stack <span className="text-primary-500">Underflow</span>
+            Stack<span className="text-primary-500">Underflow</span>
           </p>
         </Link>
-        <div>
-          <SheetClose>
-            <NavContent />
-          </SheetClose>
-          <SignedOut>
-            <div className="flex flex-col gap-3">
-              <SheetClose asChild>
-                <Link href={"/sign-in"}>
-                  <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
-                    <span className="primary-text-gradient">Login</span>
-                  </Button>
-                </Link>
-              </SheetClose>
-            </div>
-          </SignedOut>
+        <div className="flex h-screen flex-col justify-between pb-28">
+          <div>
+            <SheetClose>
+              <NavContent />
+            </SheetClose>
+          </div>
+          <div>
+            <SignedOut>
+              <div className="flex flex-col gap-3">
+                <SheetClose asChild>
+                  <Link href={"/sign-in"}>
+                    <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
+                      <span className="primary-text-gradient">Login</span>
+                    </Button>
+                  </Link>
+                </SheetClose>
+              </div>
+            </SignedOut>
+          </div>
         </div>
       </SheetContent>
     </Sheet>
