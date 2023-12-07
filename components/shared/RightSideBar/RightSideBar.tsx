@@ -45,7 +45,7 @@ const RightSideBar = () => {
             href={""}
             className="text-dark200_light900 my-5 flex justify-between"
           >
-            <Tag tag={tag} />
+            <Tag tag={tag} caps={true} />
             <span className="small-medium text-dark500_light700">{23}</span>
           </Link>
         ))}
