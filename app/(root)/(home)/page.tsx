@@ -6,118 +6,95 @@ import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
 import Link from "next/link";
 import NoResult from "@/components/shared/NoResult";
-const questions2 = [];
 const questions = [
   {
-    _id: 1,
-    title: "Css not working why?",
+    _id: "1",
+    title: "CSS not working, why?",
     tags: [
-      { _id: 1, name: "python" },
-      { _id: 2, name: "sql" },
+      { _id: "1", name: "CSS" },
+      { _id: "2", name: "HTML" },
     ],
-    author: "John Doe",
+    author: {
+      _id: "1",
+      name: "John Doe",
+      picture: "john_doe.jpg",
+    },
     upvotes: 10,
     views: 234,
-    answers: 4,
-    createdAt: "2021-09-01T12:00:000Z",
+    answers: [],
+    createdAt: new Date("September 1, 2021 12:00:00"),
   },
   {
-    _id: 2,
+    _id: "2",
     title: "JavaScript function not returning expected output",
     tags: [
-      { _id: 3, name: "javascript" },
-      { _id: 4, name: "functions" },
+      { _id: "3", name: "JavaScript" },
+      { _id: "4", name: "Functions" },
     ],
-    author: "Jane Smith",
+    author: {
+      _id: "2",
+      name: "Jane Smith",
+      picture: "jane_smith.jpg",
+    },
     upvotes: 15,
     views: 189,
-    answers: 6,
-    createdAt: "2021-10-05T08:30:000Z",
+    answers: [],
+    createdAt: new Date("October 5, 2021 08:30:00"),
   },
   {
-    _id: 3,
+    _id: "3",
     title: "Best practices for responsive web design?",
     tags: [
-      { _id: 5, name: "html" },
-      { _id: 6, name: "css" },
-      { _id: 7, name: "responsive-design" },
+      { _id: "5", name: "HTML" },
+      { _id: "6", name: "CSS" },
+      { _id: "7", name: "Responsive Design" },
     ],
-    author: "Alice Johnson",
+    author: {
+      _id: "3",
+      name: "Alice Johnson",
+      picture: "alice_johnson.jpg",
+    },
     upvotes: 20,
     views: 452,
-    answers: 12,
-    createdAt: "2021-11-15T17:45:000Z",
+    answers: [],
+    createdAt: new Date("November 15, 2021 17:45:00"),
   },
   {
-    _id: 4,
+    _id: "4",
     title: "How to optimize SQL queries for faster performance?",
     tags: [
-      { _id: 2, name: "sql" },
-      { _id: 8, name: "optimization" },
+      { _id: "2", name: "SQL" },
+      { _id: "8", name: "Optimization" },
     ],
-    author: "Bob Anderson",
+    author: {
+      _id: "4",
+      name: "Bob Anderson",
+      picture: "bob_anderson.jpg",
+    },
     upvotes: 8,
     views: 312,
-    answers: 5,
-    createdAt: "2022-01-07T10:15:000Z",
+    answers: [],
+    createdAt: new Date("January 7, 2022 10:15:00"),
   },
   {
-    _id: 5,
+    _id: "5",
     title:
       "Python TypeError: unsupported operand type(s) for +: 'int' and 'str'",
     tags: [
-      { _id: 1, name: "python" },
-      { _id: 9, name: "errors" },
+      { _id: "1", name: "Python" },
+      { _id: "9", name: "Errors" },
     ],
-    author: "Eva Martinez",
+    author: {
+      _id: "5",
+      name: "Eva Martinez",
+      picture: "eva_martinez.jpg",
+    },
     upvotes: 25,
     views: 521,
-    answers: 8,
-    createdAt: "2022-02-18T14:20:000Z",
-  },
-  {
-    _id: 6,
-    title: "Authentication issues with JWT tokens in Node.js",
-    tags: [
-      { _id: 10, name: "nodejs" },
-      { _id: 11, name: "authentication" },
-      { _id: 12, name: "jwt" },
-    ],
-    author: "Sam Wilson",
-    upvotes: 18,
-    views: 398,
-    answers: 10,
-    createdAt: "2022-03-25T09:55:000Z",
-  },
-  {
-    _id: 7,
-    title: "Handling large datasets efficiently in Pandas",
-    tags: [
-      { _id: 13, name: "python" },
-      { _id: 14, name: "pandas" },
-      { _id: 15, name: "data-handling" },
-    ],
-    author: "Sophia Brown",
-    upvotes: 30,
-    views: 732,
-    answers: 15,
-    createdAt: "2022-04-30T16:10:000Z",
-  },
-  {
-    _id: 8,
-    title: "How to deploy a React app to production?",
-    tags: [
-      { _id: 16, name: "react" },
-      { _id: 17, name: "deployment" },
-    ],
-    author: "Michael Clark",
-    upvotes: 12,
-    views: 276,
-    answers: 7,
-    createdAt: "2022-06-09T11:40:000Z",
+    answers: [],
+    createdAt: new Date("February 18, 2022 14:20:00"),
   },
 ];
-
 export default function Home() {
   return (
     <>
@@ -146,8 +123,23 @@ export default function Home() {
       </div>
       <HomeFilters />
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions2?.length > 0 ? (
-          questions?.map((question) => <QuestionCard key={question?._id} />)
+        {questions?.length > 0 ? (
+          questions?.map((question) => {
+            console.log("question ", question.createdAt);
+            return (
+              <QuestionCard
+                key={question?._id}
+                _id={question._id}
+                title={question.title}
+                tags={question.tags}
+                author={question.author}
+                upvotes={question.upvotes}
+                views={question.views}
+                createdAt={question.createdAt}
+                answers={question.answers}
+              />
+            );
+          })
         ) : (
           <NoResult
             title="There's no question to show"

@@ -8,7 +8,12 @@ const TOP_QUESTIONS = [
   "Is it only me or the font is bolder than necessary?",
 ];
 
-const TAGS = ["react js", "next js", "node js", "python"];
+const TAGS = [
+  { _id: "1", name: "CSS" },
+  { _id: "2", name: "HTML" },
+  { _id: "3", name: "REACT" },
+  { _id: "3", name: "NEXT" },
+];
 
 const RightSideBar = () => {
   return (
@@ -45,7 +50,7 @@ const RightSideBar = () => {
             href={""}
             className="text-dark200_light900 my-5 flex justify-between"
           >
-            <Tag tag={tag} caps={true} />
+            <Tag name={tag.name} _id={tag._id} caps={true} />
             <span className="small-medium text-dark500_light700">{23}</span>
           </Link>
         ))}
