@@ -19,10 +19,10 @@ const questions = [
       name: "John Doe",
       picture: "john_doe.jpg",
     },
-    upvotes: 10,
-    views: 234,
+    upvotes: 1000000,
+    views: 234457,
     answers: [],
-    createdAt: new Date("September 1, 2021 12:00:00"),
+    createdAt: new Date("September 1, 2023 12:00:00"),
   },
   {
     _id: "2",
