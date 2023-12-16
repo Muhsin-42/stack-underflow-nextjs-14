@@ -1,4 +1,5 @@
-"use client";
+"use server";
+// "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -19,6 +20,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import React, { useReducer, useRef } from "react";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { createQuestion } from "@/lib/actions/question.action";
 const type: any = "create";
 type TState = {
   isSubmit: boolean;
@@ -52,10 +54,10 @@ export default function Question() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof QuestionSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionSchema>) {
     dispatch({ type: "TOGGLE_LOADING", payload: true });
     try {
-      // make api call
+      await createQuestion({});
     } catch (error) {
     } finally {
       dispatch({ type: "TOGGLE_LOADING", payload: false });
@@ -150,6 +152,8 @@ export default function Question() {
                     // @ts-ignore
                     (editorRef.current = editor)
                   }
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => field.onChange(content)}
                   initialValue="dfg"
                   init={{
                     height: 350,
