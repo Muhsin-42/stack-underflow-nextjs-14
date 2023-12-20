@@ -1,5 +1,4 @@
-"use server";
-// "use client";
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -21,27 +20,17 @@ import React, { useReducer, useRef } from "react";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
+import { useRouter, usePathname } from "next/navigation";
+import { initialState, reducer } from "./questionReducer";
 const type: any = "create";
-type TState = {
-  isSubmit: boolean;
-};
 
-type TAction = { type: "TOGGLE_LOADING"; payload: boolean };
+interface IQuestion {
+  mongoUserId: string;
+}
 
-const initialState = {
-  isSubmit: false,
-};
-
-const reducer = (state: TState, action: TAction) => {
-  switch (action.type) {
-    case "TOGGLE_LOADING":
-      return { ...state, isSubmit: action.payload };
-    default:
-      return state;
-  }
-};
-
-export default function Question() {
+export default function Question({ mongoUserId }: IQuestion) {
+  const router = useRouter();
+  const pathname = usePathname();
   const [state, dispatch] = useReducer(reducer, initialState);
   const editorRef = useRef<Editor | null>(null);
 
@@ -57,12 +46,18 @@ export default function Question() {
   async function onSubmit(values: z.infer<typeof QuestionSchema>) {
     dispatch({ type: "TOGGLE_LOADING", payload: true });
     try {
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(mongoUserId),
+        path: pathname,
+      });
+      router.push("/");
     } catch (error) {
     } finally {
       dispatch({ type: "TOGGLE_LOADING", payload: false });
     }
-    console.log(values);
   }
   const handleInputKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
@@ -105,7 +100,7 @@ export default function Question() {
     form.setValue("tags", newTags);
   };
 
-  console.log("redd ", form.getValues());
+  // console.log("redd ", form.getValues());
   return (
     <Form {...form}>
       <form
