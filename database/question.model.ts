@@ -4,7 +4,7 @@ export interface IQuestion extends Document {
   title: string;
   content: string;
   tags: Schema.Types.ObjectId[];
-  Views: number;
+  views: number;
   upvotes: Schema.Types.ObjectId[];
   downvotes: Schema.Types.ObjectId[];
   author: Schema.Types.ObjectId;
@@ -22,7 +22,8 @@ const QuestionSchema = new Schema({
   views: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
 });
+console.log("models", models);
 
-const Question = models.Question || model("Question", QuestionSchema);
+const Question = models?.Question || model("Question", QuestionSchema);
 
 export default Question;
