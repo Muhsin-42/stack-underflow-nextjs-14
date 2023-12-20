@@ -1,17 +1,17 @@
 type TState = {
-  isSubmit: boolean;
+  isSubmitting: boolean;
 };
 
 type TAction = { type: "TOGGLE_LOADING"; payload: boolean };
 
 export const initialState = {
-  isSubmit: false,
+  isSubmitting: false,
 };
 
 export const reducer = (state: TState, action: TAction) => {
   switch (action.type) {
     case "TOGGLE_LOADING":
-      return { ...state, isSubmit: action.payload };
+      return { ...state, isSubmitting: action.payload };
     default:
       return state;
   }
