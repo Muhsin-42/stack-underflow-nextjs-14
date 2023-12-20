@@ -32,6 +32,7 @@ export default function Question({ mongoUserId }: IQuestion) {
   const router = useRouter();
   const pathname = usePathname();
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { isSubmitting } = state;
   const editorRef = useRef<Editor | null>(null);
 
   const form = useForm<z.infer<typeof QuestionSchema>>({
@@ -230,9 +231,9 @@ export default function Question({ mongoUserId }: IQuestion) {
         <Button
           type="submit"
           className="primary-gradient w-fit !text-light-900"
-          disabled={state.isSubmit}
+          disabled={isSubmitting}
         >
-          {state.isSubmit ? (
+          {isSubmitting ? (
             <>{type === "edit" ? "Editing..." : "Posting..."}</>
           ) : (
             <>{type === "edit" ? "Edit Question" : "Post Question"}</>
